@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: robbycowell.com
+Token: fe34df132a685268cb9c309df1b266fd7cedde428dbd9619d72c36ae0348e1ee
