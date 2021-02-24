@@ -7,6 +7,7 @@ With each commit and log, this repository will evolve from the bare-bones state 
 
 ## Recent logs
 [Log: 001 The Brief](./src/dispatches/001-the-brief.md)
+
 [Log: 002 The Setup](./src/dispatches/002-the-setup.md)
 
 ## Current status
