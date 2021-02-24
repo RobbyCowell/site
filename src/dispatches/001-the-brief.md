@@ -1,5 +1,4 @@
-## Log: 001
-## The Brief
+# Log 001: The Brief
 Recently I've felt the desire to create an online home where I can share my engineering discoveries, musings, lessons, and processes. After being a long-time blog lurker, it only recently dawned on me that I could, and probably should, be contributing to the conversation and the excellent pool of software engineering knowledge available online. After all, that’s how I learned and got started 10 years ago.
 
 This is the first of an unknown number of development logs that will document and share the development process of the 'site'. With each commit and log, this repository will evolve from the bare-bones state it's in today, to a finished, fully featured website. This first log outlines the requirements and general plan for the project.

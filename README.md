@@ -7,6 +7,7 @@ With each commit and log, this repository will evolve from the bare-bones state 
 
 ## Recent logs
 [Log: 001 The Brief](./src/dispatches/001-the-brief.md)
+[Log: 002 The Setup](./src/dispatches/002-the-setup.md)
 
 ## Current status
 The project is in the very early stages of construction. So far a basic Svelte app has been implemented, along with a markdown webpack loader to render the markdown source files to html for rendering in the browser.
