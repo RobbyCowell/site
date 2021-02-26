@@ -7,9 +7,9 @@ I'll be writing development logs detailing and explaining the process as the pro
 With each commit and log, this repository will evolve from the bare-bones state it's in today, to a finished, fully featured website. This first log outlines the requirements and general plan for the project which can be found [here](./src/dispatches/001-the-brief.md).
 
 ## Recent logs
-[Log: 001 The Brief](./src/dispatches/001-the-brief.md)
+[Log 001: The Brief](./src/dispatches/001-the-brief.md)
 
-[Log: 002 The Setup](./src/dispatches/002-the-setup.md)
+[Log 002: The Setup](./src/dispatches/002-the-setup.md)
 
 ## Current status
   - Svelte project implemented from scratch, the process has been detailed [here](./src/dispatches/002-the-setup.md)
