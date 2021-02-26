@@ -1,11 +1,11 @@
 # Log 002: The Setup
 
 ## Setting up a Svelte project from scratch
-Svelte's docs make it easy to [get started](https://svelte.dev/blog/the-easiest-way-to-get-started), but all approaches seemed to involve downloading templates. I'm sure this is the way to go, but I wanted to figure out how to setup a Svelte app with completely from scratch for the sake of curiosity.
+Svelte's docs make it easy to <a href="https://svelte.dev/blog/the-easiest-way-to-get-started" target="_blank" rel="noopener noreferrer">get started</a>, but all approaches seemed to involve downloading templates. I'm sure this is the way to go, but I wanted to figure out how to setup a Svelte app with completely from scratch for the sake of curiosity.
 
 Note: This log steers away form the source code of the repo slightly, because I want it to act as a stand alone tutorial for how to set-up a Svelte project from scratch with webpack.
 
-I decided to use webpack as my module bundler instead of rollup, mostly because I'm familiar with it and planning to write some custom loaders for this project (more on that later). The Svelte team have put together a [great webpack template](https://github.com/sveltejs/template-webpack) that I used as a reference for the following steps.
+I decided to use webpack as my module bundler instead of rollup, mostly because I'm familiar with it and planning to write some custom loaders for this project (more on that later). The Svelte team have put together a <a href="https://github.com/sveltejs/template-webpack" target="_blank" rel="noopener noreferrer">great webpack template</a> that I used as a reference for the following steps.
 
 ### Install dependencies
 Initialize the project with:
@@ -27,7 +27,8 @@ Install the webpack CSS loaders:
 ```
 npm install --save-dev css-loader mini-css-extract-plugin
 ```
-Note, we're using the `mini-css-extract-plugin` to support Svelte's component-scoped styling. You can read more about this approach over on their [GitHub](https://github.com/sveltejs/svelte-loader#extracting-css).
+Note, we're using the `mini-css-extract-plugin` to support Svelte's component-scoped styling. You can read more about this approach over on their 
+<a href="https://github.com/sveltejs/svelte-loader#extracting-css" target="_blank" rel="noopener noreferrer">GitHub</a>.
 
 ### Set-up project structure
 Now we're initialized, let's put the directory structure together, it looks like this:
@@ -81,7 +82,7 @@ These steps assume the `webpack.config.js ` file is empty.
   };
 ```
 
-5. [Configure webpack to allow us to `import` files without their extension (.js, .svelte etc.)](https://webpack.js.org/configuration/resolve/#resolveextensions)
+5. <a href="https://webpack.js.org/configuration/resolve/#resolveextensions" target="_blank" rel="noopener noreferrer">Configure webpack to allow us to `import` files without their extension (.js, .svelte, etc.)</a>
 ```
   ...
   module.exports = {
@@ -320,11 +321,11 @@ To see these files being compiled and output to the `public/build` directory, an
 ```
 npm run develop
 ```
-To see webpack dev server come to life and host our hello world app at [http://localhost:1337](http://localhost:1337)!
+To see webpack dev server come to life and host our hello world app at <a href="http://localhost:1337" target="_blank" rel="noopener noreferrer">http://localhost:1337</a>!
 
 That's it! We've set-up a Svelte project from scratch with webpack and are now ready to start building!
 
 ### Bonus:
-If you're just getting started with Svelte, you should consider installing the [Svelte dev tools extension](https://github.com/RedHatter/svelte-devtools) in your browser (remember to actually have a `<script>` tag in each component you want to see in the dev tools, otherwise it won't show).
+If you're just getting started with Svelte, you should consider installing the <a href="https://github.com/RedHatter/svelte-devtools" target="_blank" rel="noopener noreferrer">Svelte dev tools extension</a> in your browser (remember to actually have a `<script>` tag in each component you want to see in the dev tools, otherwise it won't show).
 
-If you're using VS code, I also installed [Svelte for VS code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode){:target="_blank"} and [this icon pack](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme) that includes icons for `.svelte` files.
+If you're using VS code, I also installed <a href="https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode" target="_blank" rel="noopener noreferrer">Svelte for VS code</a> and <a href="https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme" target="_blank" rel="noopener noreferrer">this icon pack</a> that includes icons for `.svelte` files.

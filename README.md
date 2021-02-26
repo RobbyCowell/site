@@ -1,4 +1,5 @@
-# 🏗 The Site 🚧
+
+# 🏗 The Site 🚧  · <a href="https://suspicious-clarke-09d8cc.netlify.app/"><img src="https://img.shields.io/website?down_color=red&down_message=offline&label=construction%20site&style=flat-square&up_color=green&up_message=online&url=https%3A%2F%2Fsuspicious-clarke-09d8cc.netlify.app%2F"/></a>  [![Netlify Status](https://api.netlify.com/api/v1/badges/efe8120d-4c36-47c1-b3cc-ca1fb523cafd/deploy-status)](https://app.netlify.com/sites/suspicious-clarke-09d8cc/deploys) 
 The repository for my personal site, referred to as the 'site', as it's an evolving engineering project resembling that of of a physical construction site.
 
 I'll be writing development logs detailing and explaining the process as the project is built over time. This will be a living project, effectively documenting itself as it's built.
@@ -11,9 +12,9 @@ With each commit and log, this repository will evolve from the bare-bones state 
 [Log: 002 The Setup](./src/dispatches/002-the-setup.md)
 
 ## Current status
-The project is in the very early stages of construction. So far a basic Svelte app has been implemented, along with a markdown webpack loader to render the markdown source files to html for rendering in the browser.
-
-I'm currently working on the next log on how to set-up Svelte with Webpack and a few bonus Svelte tips if using VS Code.
+  - Hand-rolled Svelte template built, the process has been detailed [here](./src/dispatches/002-the-setup.md)
+  - Basic Markdown rendering in Svelte implemented (log in progress...)
+  - Project still in the early stages of development
 
 ## Installation
 Note, you must have Node > 10 installed.
