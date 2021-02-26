@@ -12,7 +12,7 @@ With each commit and log, this repository will evolve from the bare-bones state 
 [Log: 002 The Setup](./src/dispatches/002-the-setup.md)
 
 ## Current status
-  - Hand-rolled Svelte template built, the process has been detailed [here](./src/dispatches/002-the-setup.md)
+  - Svelte project implemented from scratch, the process has been detailed [here](./src/dispatches/002-the-setup.md)
   - Basic Markdown rendering in Svelte implemented (log in progress...)
   - Project still in the early stages of development
 
