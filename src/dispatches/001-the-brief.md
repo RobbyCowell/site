@@ -7,7 +7,11 @@ Before we get into it, I want to point out that the choices I make here prioriti
 
 ## Requirements
 ### Articles
-Inspired by the movement to preserve blogs and their content, I want my blog's content to be an integral part of the source code. If the website that houses the articles goes down, breaks, or vanishes, then the content of that blog is lost - potentially forever. By keeping the source of the content available in a public Git repo or similar, the content is preserved.
+Inspired by the movement to preserve blogs and their content, I want my blog's content to be an integral part of the source code. If the website that houses the articles goes down, breaks, or vanishes, then the content of that blog is lost. 
+
+I've experienced this entropy first-hand, while at Google, I ran a site that hosted excellent content that the industry found extremely valuable, produced by some truly wonderful content strategists and producers. Unfortunately when the product was discontinued, the content that went along with the site was lost; likely forever.
+
+By keeping the source of the content available in a public repository in a universally portable format, this content can be preserved.
 
 That led me to my first technical requirement for the project: all articles should be in a portable, parsable, open format, in this case the choice is clear: markdown.
 
