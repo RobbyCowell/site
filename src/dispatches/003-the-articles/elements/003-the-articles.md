@@ -3,9 +3,48 @@ So, you might remember  from The Brief, that we want all blog article content t
 
 This raises some complications, I want to to store metadata like permalinks, slugs, publish date, modified date, author, and so on, but markdown doesn't support variables out-of-the-box so I need to come up with a way to store this information and associate it with a markdown article file.
 
+## Configuring the application to handle markdown
+Before we get into the details, we need to do a bit more configuration to get markdown files working.
+
+First, we need webpack's markdown and html loaders:
+```
+  npm install --save-dev html-loader markdown-loader
+```
+
+Then, we have to configure webpack to handle the files:
+```
+...
+rules: [
+  ...
+  {
+    test: /\.md$/,
+    use: [
+      'html-loader',
+      'markdown-loader'
+    ]
+  },
+  ...
+]
+```
+
+Finally, we can import the markdown file into the Svelte app:
+```
+<script>
+  import log02 from './dispatches/002-the-setup.md';
+</script>
+
+<h1>🏗 The Site 🚧</h1>
+
+<div>
+  { @html log02 }
+</div>
+```
+
+And that's it, the application is ready to parse our markdown into HTML files which we can render within Svelte with: `@html`.
+
 ## The Options:
 
-Here are my initial thoughts on how to approach this:
+Now, back to the problem at hand: how do we handle the blog's metadata in a way that resists entropy? Here are my initial thoughts on how to approach this:
 
 ### 1. Store article metadata in a plain old JS object or JSON file 
 I'd have a directory for each article that would contain the JSON/JS file for the article's metadata, the markdown file for the actual blog article, and a `.svelte` file that imports both and brings them together on the page.
@@ -80,5 +119,7 @@ For testing purposes, I updates App.svelte to import this test article like so:
 Which resulted in this:
 
 ![screenshot of the result of the test, showing the metadata rendering in the browser render](./images/003-the-articles-image-01.png)
+
+At this point in the article, I committed the code as described above to server as an example. You can browse the source as it is at the time of writing <a href="https://github.com/RobbyCowell/site/tree/f09f47e0f00406e78bfb0a751a9c5a614f4f8a8d/src" target="_blank" rel="noopener noreferrer">here</a>.
 
 Seems to work well enough, but we can do better!
