@@ -11,7 +11,7 @@ With each commit and log, this repository will evolve from the bare-bones state 
 
 [Log 002: The Setup](./src/dispatches/002-the-setup.md)
 
-[Log 003: The Articles](./src/dispatches/003-the-articles.md)
+[Log 003: The Articles](./src/dispatches/003-the-articles/elements/003-the-articles.md)
 
 ## Current status
   - Svelte project implemented from scratch, the process has been detailed [here](./src/dispatches/002-the-setup.md)
