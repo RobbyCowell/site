@@ -1,9 +1,9 @@
 <script>
-  import Log from './dispatches/003-the-articles/003-the-articles.svelte';
+  import Article from './dispatches/003-the-articles.md';
 </script>
 
 <h1>🏗 The Site 🚧</h1>
 
 <div>
-  <Log />
+  <Article />
 </div>
