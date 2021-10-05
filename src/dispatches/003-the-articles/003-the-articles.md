@@ -1,13 +1,3 @@
-<script context="module">
-  const slug = '003-the-articles'
-  
-  export const metadata = {
-    publishDate: new Date(Date.now()),
-    slug,
-    permalink: `https://robbycowell.com/dispatches/${slug}`
-  }
-</script>
-
 # Log 003: The Articles
 So, you might remember  from The Brief, that we want all blog article content to be in the markdown format. To take it a step further, I want these articles to be 'pure' `.md` files, so no extracting from file formats like `YAML`, `MDX`, `JSX`, etc. would be required as the system and tooling choices change over time.
 
@@ -241,5 +231,9 @@ The image loading in Markdown seems to have broken since using mdsvex to handle 
 ### Caveat 3: Indentation
 This could be related to Caveat 1, but according to mdsvex's docs, indenting code blocks can cause some weird issues, and I've definitely indented some code blocks here. So maybe that's what's going on. Either way, not being able to produce pretty, well-indented code examples on an engineering blog is going to be an issue for me.
 
-## Next steps
-Once I've worked out the above caveats, it's time to start looking into the URLs of the articles, which will involve looking into how we'll handle server-side rendering, templates and some styling, and turning this from disparate markdown files into a working blog.
+## Next steps and conclusion
+After spending some time considering the above caveats, I've concluded that Option 1 is the way to go for this project. Option 1 most aligns to this project's main purpose: resisting entropy, and `mdsvex` and most JS in Markdown libraries are simply too buggy or have too may caveats to be worth the slightly cleaner approach to the directory structure. 
+
+It's time to start looking into the URLs of the articles, which will involve looking into how we'll handle server-side rendering, templates and styling, and turning this from disparate markdown files into a working blog.
+
+Keep an eye out for the next post which will break down the key concepts of server side rendering and how they'll be applied to this project.
