@@ -1,13 +1,32 @@
 <script>
-  import One from './articles/001-the-brief/001-the-brief.svelte';
-  import Two from './articles/002-the-setup/002-the-setup.svelte';
-  import Three from './articles/003-the-articles/003-the-articles.svelte';
+  import articles from './articles/articles.js';
+
+  let articleToShow = null;
+
+  function selectArticle(articleId) {
+    articleToShow = articleId;
+  }
 </script>
 
 <h1>🏗 The Site 🚧</h1>
 
+<h3>Articles</h3>
+<ul>
+  {#each Object.keys(articles) as article}
+    <li>
+      <a 
+        on:click={() => selectArticle(article)}
+        href="#{`article-${articleToShow}`}"
+      >
+        {article}
+      </a>
+    </li>
+  {/each}
+</ul>
+
 <div>
-  <One />
-  <Two />
-  <Three />
+  {#if articleToShow}
+    <h3>Slug: {articles[articleToShow].data.slug}</h3>
+    <svelte:component this={articles[articleToShow].content} />
+  {/if}
 </div>
