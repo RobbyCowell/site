@@ -1,4 +1,5 @@
 <script>
+  import Article from './components/article'
   import articles from './articles/articles.js';
 
   let articleToShow = null;

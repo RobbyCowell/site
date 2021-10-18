@@ -1,4 +1,5 @@
-﻿# Log 004: The Basics
+﻿
+# Log 004: The Basics
 So the articles for `the site` are now stored as plain Markdown files, which are then imported and rendered from [Svelte](https://svelte.dev/).
 
 I want to clean things up before I start going exploring solutions for a hybrid web-app.
@@ -121,3 +122,97 @@ The metadata should now exist in the `articles.js` module! Let's try displaying 
 *Note that I needed an if statement here to avoid issues in cases where no article is selected but we're trying to display one*
 
 That should do it, selecting each article now shows its slug as intended!
+
+You can browse the source code as this point [here](https://github.com/RobbyCowell/site/tree/c8d9ada2135f52e18f7a57b163e212d120177e84)
+
+## Creating an article scaffolding script [#4](https://github.com/RobbyCowell/site/issues/4)
+To be able to create articles easily without loads of copy/pasting and boilerplate, I'm going to write a script that generates everything I need to get an article set-up.
+
+I'm going to keep it JS, and write a [Node](https://nodejs.org/en/docs/) script to do this and then run it with `npm`.
+
+### Creating the script and templates
+First thing's first, I created a `scripts` dir at the root level to house any scripts and templates.
+
+I then created a template for each file I want to generate in `scripts/templates`:
+
+```
+/scripts
+  /templates
+    article-component-template.svelte
+    article-markdown-template.svelte
+    article-metadata-template.svelte
+```
+
+I then copied the code from the existing files, replacing any dynamic properties with a `${propName}` pattern, for example, this is what `article-metadata.svelte` looks like:
+
+```
+const metadata = {
+  publishDate: '$date',
+  slug: '$slug',
+};
+
+export default metadata;
+```
+
+`$slug` and `$date` are going to be the dynamic properties my script will populate; for now.
+
+Now that I have my template files, I can create a Node script to generate new article files from them: `scripts/create-article.js`.
+
+At this point, many engineers would pull in templating libraries and scripts for this, however it's relatively easy to achieve what I want to do with Node's built-in libraries, namely it's File System (`fs`) module.
+
+The `create-article.js` script, here's what my first attempt looked like:
+```
+fs = require('fs');
+
+const articlesPath = './src/articles/';
+const templatesPath = './scripts/templates/';
+
+createArticle = (articleName) => {
+  const articlePath = articlesPath + articleName;
+
+  // Create article directory
+  fs.mkdir(articlePath, (err) => {
+    if (err) throw err;
+  });
+
+  createMetadata(articleName, articlePath);
+}
+
+createMetadata = (articleName, articlePath) => {
+  var metadataFilePath = `${articlePath}/${articleName}-metadata.js`;
+
+  fs.readFile(`${templatesPath}/article-metadata-template.js`, 'utf-8', (err, data) => {
+    if (err) throw err;
+
+    data = data.replace(/\$date/g, new Date(Date.now()));
+    data = data.replace(/\$slug/g, articleName);
+
+    fs.writeFile(metadataFilePath, data, (err) => { 
+      if (err) throw err;
+
+      console.log(`metadata file created: ${metadataFilePath}`);
+    });
+  });
+}
+
+createArticle('test-article');
+```
+Essentially, the `createMetadata` function:
+- Reads the template file to a `data` stream
+- Performs a regex search for the dynamic property markers I defined earlier (`$slug` and `$date`)
+- Replaces these marker strings with the actual values I want
+- Writes the modified data stream to a new file
+
+Running `node ./scripts/create-article.js` now creates the `test-article` directory and the `test-article-metadata.js` file in that directory!
+
+Great, everything works as expected, and I've written the code in such a way that I can have as many `createX` functions as necessary.
+
+The next step is to write similar functions for all the template files.
+
+...
+
+The eagle-eyed may have noticed that I'm generating a `.svelte` file for each article containing basically is the same code every-time.
+
+I'm going to create a reusable `article` svelte component to handle this, and remove the `${article-name}.svelte` file from each `articles` sub-directory. 
+
+This will make the entire `articles` directory completely transportable, as all articles will be composed of just POJO and Markdown files.
