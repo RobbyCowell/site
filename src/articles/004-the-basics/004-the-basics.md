@@ -1,4 +1,5 @@
 ﻿
+
 # Log 004: The Basics
 So the articles for `the site` are now stored as plain Markdown files, which are then imported and rendered from [Svelte](https://svelte.dev/).
 
@@ -207,12 +208,72 @@ Running `node ./scripts/create-article.js` now creates the `test-article` direct
 
 Great, everything works as expected, and I've written the code in such a way that I can have as many `createX` functions as necessary.
 
-The next step is to write similar functions for all the template files.
+The next step is to write similar functions for all the template files, which should be simple.
 
-...
+### Automating maintenance for `articles.js`
 
 The eagle-eyed may have noticed that I'm generating a `.svelte` file for each article containing basically is the same code every-time.
 
 I'm going to create a reusable `article` svelte component to handle this, and remove the `${article-name}.svelte` file from each `articles` sub-directory. 
 
 This will make the entire `articles` directory completely transportable, as all articles will be composed of just POJO and Markdown files.
+
+I created a `src/components` directory and created `Articles.svelte`, which is basically the same boring file I've been using for each article so far:
+
+```
+<script>
+  export let metadata;
+  export let content;
+</script>
+
+<div>
+  {@html content}
+</div>
+```
+And in `App.svelte` I just pass the data down as props:
+```
+<Article 
+  metadata={articles[articleToShow].data}
+  content={articles[articleToShow].content}
+/>
+```
+
+At this point, I may as well automate the maintenance of `articles.js`.  I'll write a function that  looks through all of the `articles` subdirectories and generates the necessary code in `articles.js`. I'll call this function after the templating functions have run.
+
+I added the `refreshArticles()` function to `create-article.js`, which looked like this:
+```
+refreshArticles = () => {
+  let data;
+  
+  const articles = fs.readdirSync(articlesPath, { withFileTypes: true })
+    .filter(dirEntry => dirEntry.isDirectory())
+    .map(dirEntry => dirEntry.name);
+
+  const importStatements = articles.map((article, index) => {
+    return `import Article${index}Content from './${article}/${article}.md';\nimport Article${index}Data from './${article}/${article}-metadata.js';\n`
+  });
+
+  const articlesObject = articles.map((article, index) => {
+    return `'${article}': { content: Article${index}Content, data: Article${index}Data }\n`
+  });
+
+  data = `${importStatements.join('')}\n`;
+  data += `const articles = {\n${articlesObject}};\n`;
+  data += `\nexport default articles;`;
+
+  console.log(data)
+
+  fs.writeFile(`${articlesPath}articles.js`, data, (err) => { 
+    if (err) throw err;
+
+    console.log('Articles.js updated');
+  });
+}
+```
+The generated `articles.js` is not the prettiest in terms of formatting, but I can fix that with [prettier](https://prettier.io/) (or similar) later rather than messing around trying to get the formatting right in the script.
+
+### Cleanup
+Now I can go through and delete all of the per-article `.svelte` files and use the `articles` dir and the `create-article` script in any Node-based system.
+
+All that's left to do is create an npm script to call `createArticle()`.
+

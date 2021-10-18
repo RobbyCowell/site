@@ -3,7 +3,11 @@ fs = require('fs');
 const articlesPath = './src/articles/';
 const templatesPath = './scripts/templates/';
 
-createArticle = (articleName) => {
+createArticle = () => {
+  //Get name
+  const args = process.argv.slice(2);
+  const articleName = args[0];
+
   const articlePath = articlesPath + articleName;
 
   // Create article directory
@@ -58,11 +62,11 @@ refreshArticles = () => {
     .map(dirEntry => dirEntry.name);
 
   const importStatements = articles.map((article, index) => {
-    return `import Article${index}, { data as Article${index}Data } from './${article}/${article}.svelte'; \n`
+    return `import Article${index}Content from './${article}/${article}.md';\nimport Article${index}Data from './${article}/${article}-metadata.js';\n`
   });
 
   const articlesObject = articles.map((article, index) => {
-    return `'${article}': { content: Article${index}, data: Article${index}Data }\n`
+    return `'${article}': { content: Article${index}Content, data: Article${index}Data }\n`
   });
 
   data = `${importStatements.join('')}\n`;
@@ -78,4 +82,4 @@ refreshArticles = () => {
   });
 }
 
-createArticle('test-article');
+createArticle();

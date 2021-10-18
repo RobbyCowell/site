@@ -28,7 +28,6 @@
 
 <div>
   {#if articleToShow}
-    <h3>Slug: {articles[articleToShow].data.slug}</h3>
     <Article 
       metadata={articles[articleToShow].data}
       content={articles[articleToShow].content}
