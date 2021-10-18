@@ -1,8 +1,6 @@
 <script>
-  let metadata;
-  let content;
-
-  export const data = metadata;
+  export let metadata;
+  export let content;
 </script>
 
 <div>
