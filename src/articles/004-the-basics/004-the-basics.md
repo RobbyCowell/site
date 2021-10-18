@@ -277,3 +277,22 @@ Now I can go through and delete all of the per-article `.svelte` files and use t
 
 All that's left to do is create an npm script to call `createArticle()`.
 
+NPM scripts are still kind of clunky, but I can achieve this by adding this to the scripts property in `package.json`:
+```
+"create-article":  "node ./scripts/create-article.js",
+```
+Adding a check for environment variables at the start of `createArticle()`:
+```
+  const args = process.argv.slice(2);
+  const articleName = args[0];
+```
+And finally have the file call `createArticle()` at the bottom of the file so it runs when it's invoked by node:
+```
+createArticle();
+```
+Now I can run this from the terminal:
+```
+npm run create-article test-article
+```
+The result is the same as earlier, the only difference isa I'm passing in the name of the article through an env var, and can now call this script straight from the root of my directory cleanly!
+
