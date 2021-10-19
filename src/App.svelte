@@ -14,39 +14,36 @@
 
 <h1>Robby Cowell - Software Engineer</h1>
 
-{@html bio}
-{@html intro}
+{ #if !articleToShow} 
+  {@html bio}
+  {@html intro}
+{ /if }
 
-<h2>Articles</h2>
-<a
-  on:click={() => selectArticle(null)} 
-  href="#home"
->
-  clear article selection
-</a>
+{ #if articleToShow }
+  <a on:click={ () => selectArticle(null) } href="#home">
+    Home
+  </a>
+{ /if }
 
-<hr>
-
+<h2>Articles:</h2>
 <ul>
   {#each Object.keys(articles) as article}
     <li>
       <a 
-        on:click={() => selectArticle(article)}
+        on:click={ () => selectArticle(article) }
         href="#{`article-${articleToShow}`}"
       >
-        {article}
+        { article }
       </a>
     </li>
   {/each}
 </ul>
 
-<hr>
-
 <div>
-  {#if articleToShow}
-    <Article 
-      metadata={articles[articleToShow].data}
-      content={articles[articleToShow].content}
+  { #if articleToShow }
+    <Article
+      metadata={ articles[articleToShow].data }
+      content={ articles[articleToShow].content }
     />
-  {/if}
+  { /if }
 </div>
