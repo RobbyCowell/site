@@ -296,3 +296,6 @@ npm run create-article test-article
 ```
 The result is the same as earlier, the only difference isa I'm passing in the name of the article through an env var, and can now call this script straight from the root of my directory cleanly!
 
+You can browse the source code at this point [here](https://github.com/RobbyCowell/site/tree/791b29cb8bf108803d043b788c1e6a59d9f38d6c).
+
+## Make `the site` function as personal site [#5](https://github.com/RobbyCowell/site/issues/5)
