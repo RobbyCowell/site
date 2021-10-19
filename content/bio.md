@@ -1,5 +1,5 @@
-## Bio
-Hello! I'm Robby, a software engineer, web developer, and social entrepreneur.
+## 📖 Bio
+Hello! I'm Robby, a software engineer, web developer, and entrepreneur.
 
 I lead a team of engineers building tools to improve cancer care.
 
