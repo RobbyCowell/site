@@ -1,11 +1,11 @@
-import Article0Content from './001-the-brief/001-the-brief.md';
-import Article0Data from './001-the-brief/001-the-brief-metadata.js';
-import Article1Content from './002-the-setup/002-the-setup.md';
-import Article1Data from './002-the-setup/002-the-setup-metadata.js';
-import Article2Content from './003-the-articles/003-the-articles.md';
-import Article2Data from './003-the-articles/003-the-articles-metadata.js';
-import Article3Content from './004-the-basics/004-the-basics.md';
-import Article3Data from './004-the-basics/004-the-basics-metadata.js';
+import Article0Content from '../../content/articles/001-the-brief/001-the-brief.md';
+import Article0Data from '../../content/articles/001-the-brief/001-the-brief-metadata.js';
+import Article1Content from '../../content/articles/002-the-setup/002-the-setup.md';
+import Article1Data from '../../content/articles/002-the-setup/002-the-setup-metadata.js';
+import Article2Content from '../../content/articles/003-the-articles/003-the-articles.md';
+import Article2Data from '../../content/articles/003-the-articles/003-the-articles-metadata.js';
+import Article3Content from '../../content/articles/004-the-basics/004-the-basics.md';
+import Article3Data from '../../content/articles/004-the-basics/004-the-basics-metadata.js';
 
 const articles = {
 '001-the-brief': { content: Article0Content, data: Article0Data }

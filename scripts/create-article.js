@@ -1,6 +1,8 @@
 fs = require('fs');
 
-const articlesPath = './src/articles/';
+const articlesPath = 'content/articles/';
+const relativeArticlesPath = '../../content/articles/';
+const articlesOutputPath = './src/articles/';
 const templatesPath = './scripts/templates/';
 
 createArticle = () => {
@@ -62,7 +64,7 @@ refreshArticles = () => {
     .map(dirEntry => dirEntry.name);
 
   const importStatements = articles.map((article, index) => {
-    return `import Article${index}Content from './${article}/${article}.md';\nimport Article${index}Data from './${article}/${article}-metadata.js';\n`
+    return `import Article${index}Content from '${relativeArticlesPath}${article}/${article}.md';\nimport Article${index}Data from '${relativeArticlesPath}${article}/${article}-metadata.js';\n`
   });
 
   const articlesObject = articles.map((article, index) => {
@@ -75,7 +77,7 @@ refreshArticles = () => {
 
   console.log(data)
 
-  fs.writeFile(`${articlesPath}articles.js`, data, (err) => { 
+  fs.writeFile(`${articlesOutputPath}articles.js`, data, (err) => { 
     if (err) throw err;
 
     console.log('Articles.js updated');
