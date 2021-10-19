@@ -1,5 +1,6 @@
 ﻿
 
+
 # Log 004: The Basics
 So the articles for `the site` are now stored as plain Markdown files, which are then imported and rendered from [Svelte](https://svelte.dev/).
 
@@ -294,8 +295,52 @@ Now I can run this from the terminal:
 ```
 npm run create-article test-article
 ```
-The result is the same as earlier, the only difference isa I'm passing in the name of the article through an env var, and can now call this script straight from the root of my directory cleanly!
+The result is the same as earlier, the only difference is I'm passing in the name of the article through an env var, and can now call this script straight from the root of my directory cleanly!
 
 You can browse the source code at this point [here](https://github.com/RobbyCowell/site/tree/791b29cb8bf108803d043b788c1e6a59d9f38d6c).
 
 ## Make `the site` function as personal site [#5](https://github.com/RobbyCowell/site/issues/5)
+So the 'site' is no longer an article dumping-ground, let's go one step further and have it function as my personal (albeit ugly) homepage.
+
+### Separating content and code
+I started writing my bio in HTML/JS and just can't bring myself to do it any longer. So, like the articles, I'm going to store the site's content in markdown files too.
+
+Going one step further, I want to decouple the content and the code completely, so I'm going to create a new top-level directory: `content`, where all of site's content and articles will live.
+
+The abbreviated directory structure now looks like this:
+```
+content/
+  articles/
+    001-the-brief/
+	  001-the-brief-metadata.js
+	  001-the-brief.md
+	...
+  bio.md
+  intro.md
+
+src/
+  articles/
+    articles.js // the generated file
+```
+I made a few changes to the `create-article.js` to account for the updated file-paths (made a lot easier by having earlier defined constants for the file-paths).
+
+Now the `App.svelte` component can cleanly import and render the markdown files like so:
+```
+<script>
+  import Article from './components/Article.svelte'
+  
+  import bio from '../content/bio.md'
+  import intro from '../content/intro.md';
+  import articles from './articles/articles.js';
+  ...
+</script>
+
+<h1>Robby Cowell - 🏗 The Site 🚧</h1>
+{@html bio}
+{@html intro}
+...
+```
+Much better than having a load of unwieldy html content polluting the code, and I'm now able to write the site's content in a markdown editor rather than html.
+
+### Writing the content
+Now this process is simple, I just wrote a bio and intro about the project. The site now has all of the essential info that allows it to function as my personal homepage!
