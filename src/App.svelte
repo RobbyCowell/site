@@ -12,7 +12,7 @@
   }
 </script>
 
-<h1>Robby Cowell - 🏗 The Site 🚧</h1>
+<h1>Robby Cowell - Software Engineer</h1>
 
 {@html bio}
 {@html intro}

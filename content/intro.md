@@ -3,7 +3,7 @@ You're visiting my work-in-progress personal site, dubbed the <a href="https://g
 
 The 'site' is an evolving engineering project, inspired by physical construction sites.
 
-I'll be documenting the construction of the project in articles as it's built. This will be a living project, documenting itself as it's built.
+This will be a living project, documenting itself as it's built.
 
 With each commit and log, this repository will evolve from the bare-bones state it's in today, to a finished, fully featured website. 
 
