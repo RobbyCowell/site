@@ -5,6 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "build": "NODE_ENV=production webpack",
+    "create-article": "node ./scripts/create-article.js",
     "develop": "webpack serve --content-base public"
   },
   "repository": {

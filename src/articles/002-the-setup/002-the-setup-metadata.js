@@ -1,12 +1,6 @@
-const rootURL = 'https://robbycowell.com';
-const articlesURL = 'dispatches';
-
-const slug = '001-the-setup'
-
 const metadata = {
-  publishDate: new Date(Date.now()),
-  slug,
-  permalink: `${rootURL}/${articlesURL}/${slug}`
+  publishDate: 'Wed Feb 24 2021 21:26:00 GMT-0700 (Pacific Daylight Time)',
+  slug: '002-the-setup',
 };
 
 export default metadata;
