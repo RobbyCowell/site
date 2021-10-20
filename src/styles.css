@@ -1,1 +1,11 @@
 @import 'normalize.css/normalize';
+@import 'milligram/dist/milligram.min.css';
+
+body {
+  font-family: 'Roboto Slab', serif;
+}
+
+img {
+  border: 3px solid #9b4dca;
+  border-radius: 5px;
+}

@@ -344,3 +344,67 @@ Much better than having a load of unwieldy html content polluting the code, and 
 
 ### Writing the content
 Now this process is simple, I just wrote a bio and intro about the project. The site now has all of the essential info that allows it to function as my personal homepage!
+
+## Add styles to the site [#6](https://github.com/RobbyCowell/site/issues/6)
+As I'm writing this, the 'site' is an unstyled monstrosity:
+
+![screenshot of unstyled site](./images/unstyled.png)
+
+I don't want to get too distracted by styling and branding for now, so I'm just looking for a light-weight CSS library I can use.
+
+I settled on [Milligram](https://milligram.io/) because it looks great, doesn't require applying classes to DOM elements, and is only 2kb. Set-up is super simple:
+
+```
+npm install milligram
+```
+
+Then pull the minified CSS into my `styles.css` file
+```
+// styles.css
+@import 'milligram/dist/milligram.min.css';
+```
+
+OK, let's see what it looks like:
+![screenshot of unstyled site](./images/milligram1.png)
+
+Not bad, but the font is hard to read and the content is still right up against the window.
+
+Following the docs, I wrapped all the markup in `App.svelte` in `Milligram`'s [Grid](https://milligram.io/#grids), and pulled in a different font: `Roboto Slab`.
+
+So I added this to `App.Svelte`:
+```
+...
+<div class="container">
+  <div class="row">
+    <div class="column">
+      <h1>Robby Cowell - Software Engineer</h1>
+
+      {#if !articleToShow}
+        {@html bio}
+        {@html intro}
+      {/if}
+...
+```
+
+And pulled in Roboto Slab from Google Fonts:
+```
+// index.html
+...
+<head>
+...
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto+Slab">
+...
+</head>
+```
+
+OK, let's see what it looks like:
+![screenshot of styled site](./images/milligram-final.png)
+
+Last thing: it's hard to see the difference between html and png's, so I added a little border to all images to differentiate the content from the images.
+
+```
+img {
+  border: 3px solid #9b4dca;
+  border-radius: 5px;
+}
+```
