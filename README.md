@@ -4,7 +4,7 @@ This is the source code for my personal site, referred to as the 'site'.
 
 The 'site' is an evolving engineering project, inspired by physical construction sites.
 
-I'll be documenting the construction of the project in logs as it's built. This will be a living project, effectively documenting itself as it's built.
+I'll be documenting the construction of the project in logs as it's built.
 
 With each commit and log, this repository will evolve from the bare-bones state it's in today, to a finished, fully featured website. This first log outlines the requirements and general plan for the project which can be found [here](./src/dispatches/001-the-brief.md).
 
