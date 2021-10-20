@@ -1,6 +1,3 @@
-﻿
-
-
 # Log 004: The Basics
 So the articles for `the site` are now stored as plain Markdown files, which are then imported and rendered from [Svelte](https://svelte.dev/).
 
@@ -408,3 +405,5 @@ img {
   border-radius: 5px;
 }
 ```
+
+See the code at this point [here](https://github.com/RobbyCowell/site/tree/2711058c178cdd4f3d4c3123fed776dbf8da6f1c)
