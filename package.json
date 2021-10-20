@@ -30,6 +30,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "milligram": "^1.4.1",
     "normalize.css": "^8.0.1"
   }
 }
