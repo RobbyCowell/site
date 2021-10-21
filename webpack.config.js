@@ -1,5 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 const path = require('path');
 
@@ -19,7 +20,8 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/public'),
     filename: '[name].js',
-    chunkFilename: '[name].[id].js'
+    chunkFilename: '[name].[id].js',
+    assetModuleFilename: 'build/images/[hash][ext][query]'
   },
   module: {
     rules: [
@@ -35,7 +37,7 @@ module.exports = {
             hotReload: !prod
           }
         }
-      }, 
+      },
       {
         test: /\.css$/,
         use: [
@@ -51,6 +53,10 @@ module.exports = {
         ]
       },
       {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
         test: /node_modules\/svelte\/.*\.mjs$/,
         resolve: {
           fullySpecified: false
@@ -59,8 +65,10 @@ module.exports = {
     ]
   },
   optimization: {
+    minimize: true,
     minimizer: [
-      new CssMinimizerPlugin()
+      new CssMinimizerPlugin(),
+      new TerserPlugin()
     ]
   },
   mode,
