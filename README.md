@@ -6,22 +6,8 @@ The 'site' is an evolving engineering project, inspired by physical construction
 
 I'll be documenting the construction of the project in logs as it's built.
 
-With each commit and log, this repository will evolve from the bare-bones state it's in today, to a finished, fully featured website. This first log outlines the requirements and general plan for the project which can be found [here](./src/dispatches/001-the-brief.md).
-
-## Recent logs
-[Log 001: The Brief](./src/dispatches/001-the-brief.md)
-
-[Log 002: The Setup](./src/dispatches/002-the-setup.md)
-
-[Log 003: The Articles](./src/dispatches/003-the-articles.md)
-
-## Current status
-  - Svelte project implemented from scratch, the process has been detailed [here](./src/dispatches/002-the-setup.md)
-  - [Basic Markdown rendering in Svelte implemented](./src/dispatches/003-the-articles.md)
-  - Project still in the early stages of development
-
 ## Installation
-Note, you must have Node > 10 installed.
+Note, you must have NodeJS 14.18.1 or greater.
 
 1. Clone this repository:
  ```
