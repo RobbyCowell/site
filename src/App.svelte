@@ -5,7 +5,7 @@
   import intro from "../content/intro.md";
   import articles from "./articles/articles.js";
 
-  let articleToShow = null;
+  export let articleToShow = null;
 
   function selectArticle(articleId) {
     articleToShow = articleId;

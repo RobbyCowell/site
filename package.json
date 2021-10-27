@@ -7,7 +7,7 @@
     "build": "webpack --env production",
     "build-ssr": "webpack --env production --env ssr",
     "create-article": "node ./scripts/create-article.js",
-    "develop": "webpack serve --content-base public"
+    "dev": "webpack serve --content-base public"
   },
   "repository": {
     "type": "git",
