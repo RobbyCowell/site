@@ -12,7 +12,7 @@ module.exports = (env) => {
   return {
     target: ssr ? 'node' : 'web',
     entry: {
-      'build/bundle': './src/App.svelte'
+      'build/bundle': ssr ? './src/App.svelte' : './src/entry.js'
     },
     resolve: {
       alias: {
@@ -24,9 +24,9 @@ module.exports = (env) => {
       assetModuleFilename: 'build/images/[hash][ext][query]',
       chunkFilename: ssr ? '[name]-[id]-ssr.js' : ' [name].[id].js',
       filename: ssr ? '[name]-ssr.js' : '[name].js',
+      libraryTarget: 'umd',
       path: path.join(__dirname, '/public'),
       publicPath: '/',
-      libraryTarget: 'umd'
     },
     module: {
       rules: [
@@ -37,12 +37,11 @@ module.exports = (env) => {
             options: {
               compilerOptions: {
                 dev: !prod,
-                format: 'cjs',
                 generate: ssr ? 'ssr' : 'dom',
-                hydratable: !ssr,
+                hydratable: true,
               },
               emitCss: prod,
-              hotReload: !prod,
+              hotReload: !prod
             }
           }
         },
@@ -76,7 +75,7 @@ module.exports = (env) => {
       minimize: true,
       minimizer: [
         new CssMinimizerPlugin(),
-        // new TerserPlugin()
+        new TerserPlugin()
       ]
     },
     mode,
