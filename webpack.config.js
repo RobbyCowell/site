@@ -4,82 +4,91 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 const path = require('path');
 
-const mode = process.env.NODE_ENV || 'development';
-const prod = mode === 'production';
+module.exports = (env) => {
+  const mode = env.production ? 'production' : 'development';
+  const prod = mode === 'production';
+  const ssr = env.ssr || false;
 
-module.exports = {
-  entry: {
-    'build/bundle': './src/entry.js'
-  },
-  resolve: {
-    alias: {
-      svelte: path.dirname(require.resolve('svelte/package.json'))
+  return {
+    target: ssr ? 'node' : 'web',
+    entry: {
+      'build/bundle': './src/App.svelte'
     },
-    extensions: ['.js', '.svelte', '.css'],
-  },
-  output: {
-    path: path.join(__dirname, '/public'),
-    filename: '[name].js',
-    chunkFilename: '[name].[id].js',
-    assetModuleFilename: 'build/images/[hash][ext][query]'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.svelte$/,
-        use: {
-          loader: 'svelte-loader',
-          options: {
-            compilerOptions: {
-              dev: !prod
-            },
-            emitCss: prod,
-            hotReload: !prod
+    resolve: {
+      alias: {
+        svelte: path.dirname(require.resolve('svelte/package.json'))
+      },
+      extensions: ['.js', '.svelte', '.css'],
+    },
+    output: {
+      assetModuleFilename: 'build/images/[hash][ext][query]',
+      chunkFilename: ssr ? '[name]-[id]-ssr.js' : ' [name].[id].js',
+      filename: ssr ? '[name]-ssr.js' : '[name].js',
+      path: path.join(__dirname, '/public'),
+      publicPath: '/',
+      libraryTarget: 'umd'
+    },
+    module: {
+      rules: [
+        {
+          test: /\.svelte$/,
+          use: {
+            loader: 'svelte-loader',
+            options: {
+              compilerOptions: {
+                dev: !prod,
+                format: 'cjs',
+                generate: ssr ? 'ssr' : 'dom',
+                hydratable: !ssr,
+              },
+              emitCss: prod,
+              hotReload: !prod,
+            }
           }
-        }
-      },
-      {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader'
-        ]
-      },
-      {
-        test: /\.md$/,
-        use: [
-          'html-loader',
-          'markdown-loader'
-        ]
-      },
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-      },
-      {
-        test: /node_modules\/svelte\/.*\.mjs$/,
-        resolve: {
-          fullySpecified: false
-        }
-      },
-    ]
-  },
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new CssMinimizerPlugin(),
-      new TerserPlugin()
-    ]
-  },
-  mode,
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css'
-    })
-  ],
-  devtool: prod ? false : 'source-map',
-  devServer: {
-    hot: true,
-    port: 1337
-  }
-};
+        },
+        {
+          test: /\.css$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader'
+          ]
+        },
+        {
+          test: /\.md$/,
+          use: [
+            'html-loader',
+            'markdown-loader'
+          ]
+        },
+        {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset/resource',
+        },
+        {
+          test: /node_modules\/svelte\/.*\.mjs$/,
+          resolve: {
+            fullySpecified: false
+          }
+        },
+      ]
+    },
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new CssMinimizerPlugin(),
+        // new TerserPlugin()
+      ]
+    },
+    mode,
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: '[name].css'
+      })
+    ],
+    devtool: prod ? false : 'source-map',
+    devServer: {
+      hot: true,
+      port: 1337
+    }
+  };
+}
