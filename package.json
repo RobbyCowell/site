@@ -4,7 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "build": "webpack --env production",
+    "build-client": "webpack --env production",
     "build-ssr": "webpack --env production --env ssr",
     "create-article": "node ./scripts/create-article.js",
     "dev": "webpack serve --content-base public"
