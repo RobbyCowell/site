@@ -4,12 +4,18 @@
   import bio from "../content/bio.md";
   import intro from "../content/intro.md";
   import articles from "./articles/articles.js";
+import { onMount } from "svelte";
 
   export let articleToShow = null;
 
   function selectArticle(articleId) {
     articleToShow = articleId;
   }
+
+  onMount(()=> {
+    console.log(`mounting: ${articleToShow}`)
+    console.log(articles)
+    })
 </script>
 
 <div class="container">

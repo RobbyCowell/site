@@ -1,39 +1,39 @@
 fs = require('fs');
-const http = require('http');
 
 const App = require('./public/build/bundle-ssr.js').default;
 
-const listener = async (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  const page = await generateHtml('004-the-basics');
-  res.end(page);
-}
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.use(express.static('public'));
+
+app.get('/', async (req, res) => {
+  // TODO: Replace the arg to generateHtml with the article param from the request URL
+  const page = await generateHtml('001-the-brief');
+  console.log(page);
+  res.send(page);
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
 
 const generateHtml = async (articleToShow) => {
-  const { html } = App.render({ articleToShow });
-  const template = await fs.promises.readFile('./public/index.html', 'utf8');
-  return template.replace(/\<\!--\$target--\>/g, html);
+  const { html } = App.render({ articleToShow: articleToShow });
+  
+  // TODO: see if there's a way to do this in one function call
+  const template = await fs.promises.readFile('./public/tmp.html', 'utf8');
+  const rendered = await template.replace(/\<\!--\$target--\>/g, html);
+  const cleaned = await rendered.replace(/file:\/\//g, '');
+
+  // TODO: clean this up
+  let final = '';
+  if (articleToShow) {
+    final = await cleaned.replace(/\$articleToShow/g, `${articleToShow}`);
+  } else {
+    final = await cleaned.replace(/'\$articleToShow'/g, null);
+  }
+
+  return final;
 }
-
-const server = http.createServer(listener);
-server.listen(8080);
-
-// fs.readFile('./public/index.html', 'utf-8', (err, data) => {
-//   if (err) throw err;
-
-//   data = data.replace(/\<\!--\$target--\>/g, html);
-
-//   // TODO: replace this with server-side response
-//   // compileSSRHtml(data, true);
-// });
-
-// const compileSSRHtml = (data, writeTestFile) => {
-//   console.log(data);
-
-//   if (writeTestFile) {
-//     fs.writeFile('./public/index-test.html', data, 'utf-8', (err) => {
-//       if (err) throw err;
-//       console.log('The file has been saved!');
-//     });
-//   }
-// }
