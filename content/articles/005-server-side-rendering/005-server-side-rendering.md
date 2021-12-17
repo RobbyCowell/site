@@ -154,21 +154,112 @@ It's time to actually write something that resembles a server!
 
 *Note to the one person reading this (most likely my future self): yes, I'm a front-end developer BUT I started as a Web Engineer and therefore make front-end engineering as complicated as possible as this project clearly demonstrates.*
 
+### Setup
+First of all, I'm going to install [`express`](https://expressjs.com/) to make life a bit easier on the server-side of things.
 
+```
+npm install express --save
+```
 
+And then in `server.js`, I started off with something like this:
+```
+fs = require('fs');
 
+const express = require('express');
+const app = express();
+const port = 3000;
 
+const App = require('./public/build/bundle-ssr.js').default;
 
-## 3. Serve pre-compiled page and hydrate it
+app.use(express.static('public'));
 
-## 4. Implement routing
+app.get('/', async (req, res) => {
+  const page = await generateHtml('001-the-brief');
+  res.send(page);
+});
 
-## 5. Implement history
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+});
 
-## Thoughts bin
+const generateHtml = async (articleToShow) => {
+  const { html } = App.render({ articleToShow });
+  const template = await fs.promises.readFile('./public/index.html', 'utf8');
+  return template.replace(/\<\!--\$target--\>/g, html);
+}
+```
 
-Can I configure the server.js file to call webpack?
+So, I'm just wrapping the same SSR code we just tested into an `express` server, so the server-side rendered page is returned from the server via a get request to the default route (`/`).
 
-When I deploy the entire app, I need to compile BOTH the client side and SSR bundles
+Starting up `server.js` again, and going to `localhost:3000/`, we can see the page being loaded successfully.
+
+### Passing props from server to client
+Something caught me out here, rendering the app without an article specified worked fine, and was successfully hydrated, but if I passed in a specific article I wanted to render on load (let's imagine someone visited the site with a URL to a specific article), the page would just load the app as if no article was specified.
+
+This is because in `entry.js`:
+```
+import './styles.css';
+
+import App from './App.svelte';
+
+const app = new App({
+  target: document.body,
+  hydrate: true
+});
+
+export default app;
+```
+
+...I'm not passing in any props!
+
+The next question is, how can the JS entry point get these props if it's outside the Svelte component. The answer is that we need the SSR code to save the prop at the global level, so `entry.js` has access to it at hydration time.
+
+So, I first added a placeholder in my html file to hold the props:
+
+```
+  <script>
+    document.app = {
+      articleToShow: '$articleToShow'
+    }
+  </script>
+```
+
+And then in the SSR code (`server.js`), replace the placeholder in this file ($articleToShow), with the desired articleToShow:
+
+```
+template.replace(/\$articleToShow/g, `${articleToShow}`);
+```
+
+This will create the local variable: `articleToShow` in a global location `document.app`, which `entry.js` can then access.
+
+Finally, we need to tell entry.js to pass in this prop to the root Svelte component:
+
+```
+const app = new App({
+  target: document.body,
+  props: { articleToShow: document.app.articleToShow }, // grab the global variable
+  hydrate: true
+});
+```
+
+Now in `server.js`, I can pass any (valid) article id to the `generateHtml()` function, and the correct article will render AND hydrate with the correct props!
+
+### Retreiving the article ID from the URL
+So far, I'm just hard-coding the articleToShow in `server.js`:
+```
+app.get('/', async (req, res) => {
+  const page = await generateHtml('001-the-brief');
+  console.log(page);
+  res.send(page);
+})
+```
+
+To make this a decent SSR app, I should handle URLs that specify which article should be shown. This will allow visitors to go straight to specific articles on my site!
+
+First, let's grab the URL and check for any parameters:
+
+- Parse query from the URl to generateHtml() function
+- Cleanup server.js
+
 
 A game is a series of interesting choices
