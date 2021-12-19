@@ -244,22 +244,9 @@ const app = new App({
 
 Now in `server.js`, I can pass any (valid) article id to the `generateHtml()` function, and the correct article will render AND hydrate with the correct props!
 
-### Retreiving the article ID from the URL
-So far, I'm just hard-coding the articleToShow in `server.js`:
-```
-app.get('/', async (req, res) => {
-  const page = await generateHtml('001-the-brief');
-  console.log(page);
-  res.send(page);
-})
-```
+That's enough for getting the basic server-side rendering functionality working.
 
-To make this a decent SSR app, I should handle URLs that specify which article should be shown. This will allow visitors to go straight to specific articles on my site!
-
-First, let's grab the URL and check for any parameters:
-
-- Parse query from the URl to generateHtml() function
-- Cleanup server.js
-
-
-A game is a series of interesting choices
+The next post will focus on building the server-side rendering functionality out further, I'll cover:
+  - Routing and cleaning up the URLs
+  - Configuring `server.js` further to render the article based on the URL.
+  - Refactor and improve code in `server.js`
