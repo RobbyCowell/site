@@ -250,3 +250,5 @@ The next post will focus on building the server-side rendering functionality out
   - Routing and cleaning up the URLs
   - Configuring `server.js` further to render the article based on the URL.
   - Refactor and improve code in `server.js`
+
+Code as of writing can be seen [here](https://github.com/RobbyCowell/site/commit/5f4724df659c7ef3a550f09ad344486cdbdd5c84).

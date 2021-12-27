@@ -4,6 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
+    "build": "npm run build-client && npm run build-ssr",
     "build-client": "webpack --env production",
     "build-ssr": "webpack --env production --env ssr",
     "create-article": "node ./scripts/create-article.js",
@@ -24,6 +25,7 @@
     "css-minimizer-webpack-plugin": "^3.1.1",
     "express": "^4.17.1",
     "html-loader": "^2.1.0",
+    "html-webpack-plugin": "^5.5.0",
     "markdown-loader": "^6.0.0",
     "milligram": "^1.4.1",
     "mini-css-extract-plugin": "^1.3.8",

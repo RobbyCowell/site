@@ -8,6 +8,8 @@ import Article3Content from '../../content/articles/004-the-basics/004-the-basic
 import Article3Data from '../../content/articles/004-the-basics/004-the-basics-metadata.js';
 import Article4Content from '../../content/articles/005-server-side-rendering/005-server-side-rendering.md';
 import Article4Data from '../../content/articles/005-server-side-rendering/005-server-side-rendering-metadata.js';
+import Article5Content from '../../content/articles/006-routing/006-routing.md';
+import Article5Data from '../../content/articles/006-routing/006-routing-metadata.js';
 
 const articles = {
 '001-the-brief': { content: Article0Content, data: Article0Data }
@@ -15,6 +17,7 @@ const articles = {
 ,'003-the-articles': { content: Article2Content, data: Article2Data }
 ,'004-the-basics': { content: Article3Content, data: Article3Data }
 ,'005-server-side-rendering': { content: Article4Content, data: Article4Data }
+,'006-routing': { content: Article5Content, data: Article5Data }
 };
 
 export default articles;

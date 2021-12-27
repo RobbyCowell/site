@@ -1,6 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const path = require('path');
 
@@ -82,7 +83,12 @@ module.exports = (env) => {
     plugins: [
       new MiniCssExtractPlugin({
         filename: '[name].css'
-      })
+      }),
+      ...(prod ? [] : [
+        new HtmlWebpackPlugin({
+          template: './scripts/templates/dev.html'
+        })
+      ])
     ],
     devtool: prod ? false : 'source-map',
     devServer: {

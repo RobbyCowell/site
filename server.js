@@ -9,31 +9,36 @@ const port = 3000;
 app.use(express.static('public'));
 
 app.get('/', async (req, res) => {
-  // TODO: Replace the arg to generateHtml with the article param from the request URL
-  const page = await generateHtml('001-the-brief');
-  console.log(page);
+  const page = await generateHtml();
   res.send(page);
-})
+});
+
+app.get('/articles/:articleId', async (req, res) => {
+  const articleId = req.params.articleId;
+
+  const page = await generateHtml(articleId);
+  res.send(page);
+});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
-})
+});
 
 const generateHtml = async (articleToShow) => {
+  let output;
+
   const { html } = App.render({ articleToShow: articleToShow });
   
-  // TODO: see if there's a way to do this in one function call
-  const template = await fs.promises.readFile('./public/tmp.html', 'utf8');
-  const rendered = await template.replace(/\<\!--\$target--\>/g, html);
-  const cleaned = await rendered.replace(/file:\/\//g, '');
+  const template = await fs.promises.readFile('./scripts/templates/ssr.html', 'utf8');
 
-  // TODO: clean this up
-  let final = '';
+  output = await template.replace(/\<\!--\$target--\>/g, html);
+  output = await output.replace(/file:\/\//g, '');
+
   if (articleToShow) {
-    final = await cleaned.replace(/\$articleToShow/g, `${articleToShow}`);
+    output = await output.replace(/\$articleToShow/g, `${articleToShow}`);
   } else {
-    final = await cleaned.replace(/'\$articleToShow'/g, null);
+    output = await output.replace(/'\$articleToShow'/g, null);
   }
 
-  return final;
-}
+  return output;
+};

@@ -1,21 +1,33 @@
 <script>
+  import { onMount } from 'svelte';
+
   import Article from "./components/Article.svelte";
 
   import bio from "../content/bio.md";
   import intro from "../content/intro.md";
   import articles from "./articles/articles.js";
-import { onMount } from "svelte";
 
   export let articleToShow = null;
 
-  function selectArticle(articleId) {
-    articleToShow = articleId;
-  }
+  onMount(() => {
+    window.onpopstate = (event) => {
+      if (event.state) articleToShow = event.state.article;
+    }
+  });
 
-  onMount(()=> {
-    console.log(`mounting: ${articleToShow}`)
-    console.log(articles)
-    })
+  function selectArticle(articleId) {
+    let stateObject = {
+      article: articleId,
+    };
+
+    articleToShow = articleId;
+
+    if (articleId) { 
+      history.pushState(stateObject, "", `/articles/${articleId}`);
+    } else {
+      history.pushState(stateObject, "", "/");
+    }
+  }
 </script>
 
 <div class="container">
@@ -29,7 +41,7 @@ import { onMount } from "svelte";
       {/if}
 
       {#if articleToShow}
-        <a on:click={() => selectArticle(null)} href="#home"> Home </a>
+        <a on:click|preventDefault={() => selectArticle(null)} href="../."> Home </a>
       {/if}
 
       <h2>Articles:</h2>
@@ -37,8 +49,8 @@ import { onMount } from "svelte";
         {#each Object.keys(articles) as article}
           <li>
             <a
-              on:click={() => selectArticle(article)}
-              href="#{`article-${articleToShow}`}"
+              on:click|preventDefault={ () => selectArticle(article) }
+              href="{`articles/${articleToShow}`}"
             >
               {article}
             </a>
