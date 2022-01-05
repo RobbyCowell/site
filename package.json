@@ -8,7 +8,8 @@
     "build-client": "webpack --env production",
     "build-ssr": "webpack --env production --env ssr",
     "create-article": "node ./scripts/create-article.js",
-    "dev": "webpack serve --content-base public"
+    "dev": "webpack serve --content-base public",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
