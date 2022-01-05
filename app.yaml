@@ -1,0 +1,9 @@
+runtime: nodejs16
+
+handlers:
+- url: /build
+  static_dir: public/build
+
+- url: /(.*\.(gif|png|jpg))$
+  static_files: public/build/images/\1
+  upload: public/build/images/.*\.(gif|png|jpg)$

@@ -8,7 +8,8 @@
     "build-client": "webpack --env production",
     "build-ssr": "webpack --env production --env ssr",
     "create-article": "node ./scripts/create-article.js",
-    "dev": "webpack serve --content-base public"
+    "dev": "webpack serve --content-base public",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -20,10 +21,12 @@
     "url": "https://github.com/RobbyCowell/site/issues"
   },
   "homepage": "https://github.com/RobbyCowell/site#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
   "devDependencies": {
     "css-loader": "^5.0.2",
     "css-minimizer-webpack-plugin": "^3.1.1",
-    "express": "^4.17.1",
     "html-loader": "^2.1.0",
     "html-webpack-plugin": "^5.5.0",
     "markdown-loader": "^6.0.0",
