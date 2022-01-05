@@ -10,6 +10,8 @@ import Article4Content from '../../content/articles/005-server-side-rendering/00
 import Article4Data from '../../content/articles/005-server-side-rendering/005-server-side-rendering-metadata.js';
 import Article5Content from '../../content/articles/006-routing/006-routing.md';
 import Article5Data from '../../content/articles/006-routing/006-routing-metadata.js';
+import Article6Content from '../../content/articles/007-deployment/007-deployment.md';
+import Article6Data from '../../content/articles/007-deployment/007-deployment-metadata.js';
 
 const articles = {
 '001-the-brief': { content: Article0Content, data: Article0Data }
@@ -18,6 +20,7 @@ const articles = {
 ,'004-the-basics': { content: Article3Content, data: Article3Data }
 ,'005-server-side-rendering': { content: Article4Content, data: Article4Data }
 ,'006-routing': { content: Article5Content, data: Article5Data }
+,'007-deployment': { content: Article6Content, data: Article6Data }
 };
 
 export default articles;
