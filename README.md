@@ -7,7 +7,7 @@ The 'site' is an evolving engineering project, inspired by physical construction
 I'll be documenting the construction of the project in logs as it's built.
 
 ## Installation
-Note, you must have NodeJS 14.18.1 or greater.
+Note, you must have NodeJS 16 or greater.
 
 1. Clone this repository:
  ```
@@ -27,7 +27,7 @@ Note, you must have NodeJS 14.18.1 or greater.
 ```
 4. Run the project
 ```
-  npm run develop
+  npm run dev
 ```
 
 5. Visit the site at: [http://localhost:1337/](http://localhost:1337/)
