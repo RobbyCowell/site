@@ -5,14 +5,10 @@ The site's server-side rendering and routing functionality is now working as int
 
 ## Provider selection
 There are many, many options for NodeJS hosting/cloud providers in 2022, but I'm going to go with GCP's App Engine because:
-
-  - I'm familiar with App Engine - while working at Google, the site I was responsible for was hosted by App Engine
-
-  - App Engine's free tier is pretty generous, and will likely remain free for my traffic expectations
-
-  - Carbon neutral data-centers
-
-  - Relatively simple deployment process
+- I'm familiar with App Engine - while working at Google, the site I was responsible for was hosted by App Engine
+- App Engine's free tier is pretty generous, and will likely remain free for my traffic expectations
+- Carbon neutral data-centers
+- Relatively simple deployment process
 
 ## Configuring 'the site' for App Engine
 The key piece of configuration for most App Engine app's is the `app.yaml` file, which tells App Engine which runtime to use, how to handle various static paths, and a whole load more.
