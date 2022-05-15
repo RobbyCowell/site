@@ -31,6 +31,11 @@ handlers:
 
 Essentially I'm just specifying the runtime and how the URLs should map to the various static directories. This should be enough to get us going, or so I thought.
 
+I can now deploy the site to App Engine by running this command:
+```
+gcloud app deploy
+```
+
 ### App Engine NodeJs endless reload
 
 Deploying my app resulted in an endless page-load attempt, I could tell from the logs that the server was starting, but when I tried to load the homepage, the browser would never get a completed request and the page would be in an endless loading state.
