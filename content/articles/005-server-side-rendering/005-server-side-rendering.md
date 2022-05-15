@@ -102,7 +102,7 @@ Which I contained my`package.json`'s `scripts`:
 "build-ssr": "webpack --env production --env ssr",
 ```
 
-You can see the entire `webpack.config.js` file at this stage here [here](TODO).
+You can see the entire `webpack.config.js` file at this stage [on the repo](TODO).
 
 ## Rendering the App on the server
 All this talk of servers and I've yet to write a single line of server-side code! Let's change that.
@@ -251,4 +251,4 @@ The next post will focus on building the server-side rendering functionality out
   - Configuring `server.js` further to render the article based on the URL.
   - Refactor and improve code in `server.js`
 
-Code as of writing can be seen [here](https://github.com/RobbyCowell/site/commit/5f4724df659c7ef3a550f09ad344486cdbdd5c84).
+Code as of writing can be seen [on the GitHub repo](https://github.com/RobbyCowell/site/commit/5f4724df659c7ef3a550f09ad344486cdbdd5c84).
